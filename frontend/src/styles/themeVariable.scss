@@ -1,0 +1,113 @@
+@import './iwVariables.scss';
+
+$themes: (
+  light: (
+    colorText:$blue-dark,
+    HeadTextClr:$blue-900,
+    primBtnBg:$primary-color,
+    primBtnClr:$white,
+    primBtnHvrBg:$secondary-color,
+    textBtnClr:$secondary-color,
+    outlineBtn:$primary-color,
+    inputLable:$gray-mute,
+    inputBg:$white-96,
+    inputBrd:$blue-100,
+    inputHvrBrd:$blue-300,
+    inputBxShwd:rgba($blue-200, .6),
+    inputPlcHd:$blue-gray,
+    inputIconClr:$blue-gray,
+    authLink:$blue-700,
+    dashboardBg:$blue-700,
+    rightPanelBg:$white,
+    navItemHvrBrd:$blue-200,
+    navItemActBg:$primary-color,
+    navItemActClr:$white,
+    navItemBg:$blue-800,
+    navItemClr:$blue-200,
+    userIconBg:$blue-100,
+    userIconClr:$blue-800,
+    userIconActBrd:$white-96,
+    formDivBrd:$white-93,
+    modalBg:$white,
+    tableRowOddBg:#f0f3ff,
+    tableHeaderBg:#F9FAFB,
+    tableHeaderClr:#626D99,
+    tableActionClr:$blue-800,
+    profileDivder:#eee,
+    profileRoleBg:$blue-50,
+    profileRoleClr:$blue-800,
+    profileRoleBrd:$blue-100,
+    profileTxt:$blue-dark,
+    authLeftBg: $primary-color,
+    authRightBg:#EDF1FF,
+    loginCardBg:rgba($white,.9),
+    loginInputBg:$white,
+    noteIcon:#7384c8,
+  ),
+
+  dark: (
+    colorText:#c7c7c7,
+    HeadTextClr:#d6d6d6,
+    primBtnBg:#3373cc,
+    primBtnClr:$white,
+    primBtnHvrBg:$secondary-color,
+    outlineBtn:#667099,
+    textBtnClr:#9ba6d4,
+    inputLable:#808080,
+    inputBg:#050505,
+    inputBrd:#2e2e2e,
+    inputHvrBrd:#adbdff90,
+    inputBxShwd:#adbdff70,
+    inputPlcHd:#797979,
+    inputIconClr:#858585,
+    authLink:#728cf3,
+    dashboardBg:#141414,
+    rightPanelBg:#050505,
+    navItemHvrBrd:#65697b,
+    navItemActBg:#292929,
+    navItemActClr:$white-96,
+    navItemBg:#1a1a1a,
+    navItemClr:#B3B3B3,
+    userIconBg:#25336a,
+    userIconClr:#d8ddf3,
+    userIconActBrd:#7a82b8,
+    formDivBrd:#2f2f2f,
+    modalBg:#141414,
+    tableHeaderBg:#1a1a1a,
+    tableHeaderClr:#B3B3B3,
+    tableActionClr:#7a82b8,
+    tableRowOddBg:#0f0f0f,
+    profileDivder:#1f1f1f,
+    profileRoleBg:#1a1a1a,
+    profileRoleClr:#a8adc2,
+    profileRoleBrd:#252737,
+    profileTxt:#b3b3b3,
+    authLeftBg:#000207,
+    authRightBg:#242630,
+    loginCardBg:rgba(0, 0, 0, 0.8),
+    loginInputBg:#0f0f0f,
+    noteIcon:$blue-50,
+  ),
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+            (
+              $key: $value,
+            )
+          ) !global;
+        }
+        @content;
+        $theme-map: null !global;
+      }
+   }
+}
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

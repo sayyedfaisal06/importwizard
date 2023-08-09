@@ -1,0 +1,134 @@
+@import '../../styles/iwVariables';
+@import '../../styles/mixins';
+@import '../../styles/themeVariable';
+
+.adminWrapper {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    h4 { 
+        margin-bottom:1.5rem;
+    }
+}
+
+.addTable{
+    display:flex;
+    flex-direction:column;
+}
+.updateTable, .columnValidation {
+    display:flex;
+    flex-direction:column;
+    margin-top:1rem;
+    gap:3rem;
+    .table { width:56rem; }
+}
+
+.columnValidation {
+    .formDiv {
+        .validTableColumns{
+            display:flex;
+            flex-wrap:wrap;
+            margin-bottom:2rem;
+            .validCol {
+                display:flex;
+                flex-direction:column;
+                margin-right:2rem;
+                &:last-of-type {
+                    margin-right:0;
+                }
+                label { /*font-size:1.6rem; color:$blue-900;*/ margin-bottom:.8rem; }
+            }
+        }
+    }
+}
+
+.tableSec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:1% 10%;
+}
+
+.formDiv {
+    width:fit-content;
+    padding:2rem;
+    border-radius:12px;
+    border:1px solid;
+    @include themify($themes){ border-color: themed(formDivBrd); }
+    .tableName {
+        padding:0 0 2rem;
+        p { font-weight:500;
+            @include themify($themes){ color: themed(HeadTextClr); }
+        }
+    }
+    .tableColumns {
+        display:flex;
+        flex-wrap: wrap;
+        max-width:860px;
+        height:max-content;
+        transition:linear .6s;
+        .formGroup {
+            width:20rem;
+            &:nth-of-type(4),&:nth-of-type(8), &:last-of-type {
+                margin-right:0;
+            }
+        }    
+    }
+    .addColumn {
+        display:flex;
+        justify-content:left;
+        color:$blue-700;
+        margin-bottom:1rem;
+        font-size:20px;
+        .btn-text { padding-left:0;
+            &:focus {
+                transform:scale(.95);
+                transition: ease-in .3s;
+            }
+        }
+    }
+    .buttonDiv {
+        display:flex;
+        justify-content:center;
+        button { margin-right:1rem; }
+    }
+}
+
+@include respond(phone) {
+    .formDiv {
+        .tableColumns {
+            max-height:305px;
+            overflow-y:auto;
+        .formGroup {
+            width:35rem;
+        }    
+        }
+    }
+    .updateTable .table,
+     .columnValidation .table {
+        width:42rem;
+    }
+
+    .columnValidation .formDiv{
+        padding:2rem 3rem;
+        .validTableColumns {
+            max-height:348px;
+            overflow-y:auto;
+            .validCol {
+                flex-direction:column;
+                align-items:flex-start;
+                margin-right:0;
+                margin-bottom:1.6rem;
+                [class*=-MuiFormControl-roo] {
+                    min-width:280px;
+                }
+                label {
+                    margin-right:0;
+                    margin-bottom:.8rem;
+                }
+            }
+        }
+    } 
+}

@@ -1,0 +1,39 @@
+
+
+//Media query manager
+/*
+0 - 600px: Phone
+600 - 900px: Table portrait
+900 - 1200px: Tablet Landscape
+[1200 - 1800px] where normal style apply
+1800px + : Big Desktop
+*/
+
+@mixin respond-phone {
+    @media (max-width:600px) { @content };
+}
+
+/*
+$breakponts argument choices
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em = 16px
+*/
+
+@mixin respond($breakponts) {
+    @if $breakponts == phone {
+        @media (max-width:37.5em) { @content };    //600px
+    }
+    @if $breakponts == tab-port {
+        @media (max-width:56.29em) { @content };    //900px
+    }
+    @if $breakponts == tab-land {
+        @media (max-width:75em) { @content };       //1200px
+    }
+    @if $breakponts == big-desktop {
+        @media (min-width:112.5em) { @content };     //1800px
+    }
+}
